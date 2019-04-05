@@ -22,9 +22,7 @@ const tyrannosaurus = new Dinosaur({
   length: 12+'m',
   period: 'Late Cretaceious'
 }); 
-Dinosaur.prototype.roar = function() {
-    return "RAWERSRARARWERSARARARRRR";
-}; // WRONG, COME BACK AND FIX IT.
+
 
 // stegosaurus, herbivorous, 2000kg, 9m, Late Jurassic
 
@@ -62,7 +60,17 @@ console.log(tyrannosaurus.period);
 
 
 // Create a new roar method for the tyrannosaurus.  When called, return "RAWERSRARARWERSARARARRRR!" Log the result.
-console.log(tyrannosaurus.roar());
+Dinosaur.prototype.roar = function(dino) {
+  if (dino.name === 'tyrannosaurus') {
+    return "RAWERSRARARWERSARARARRRR";
+  } else {
+    return null;
+  } 
+};
+//I realize now that I should have made them into three separate and distinct objects, but I'd already created them into parent-child objects so they could share Dinosaur properties and I like that better. So I opted to make a prototype method that only allows tyrannosaurus to use it.
+console.log(tyrannosaurus.roar(tyrannosaurus));
+console.log(velociraptor.roar(velociraptor)); 
+
 
 
 // ==== Arrays ====
@@ -168,11 +176,10 @@ console.log(largerPopulation);
 The zoos need to know their total animal population across the United States.  Find the total population from all the zoos using the .reduce() method.
 */
 const populationTotal = zooAnimals.reduce(function(accumulator, current) {
-
   return accumulator + current.population;
-});
+}, 0);
 
-console.log(populationTotal); /////////////?
+console.log(populationTotal); 
 
 
 /* 
